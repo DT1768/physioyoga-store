@@ -8,8 +8,10 @@ exports.getUserByID = (req,res,next,id)=>{
                 error: "No user Found in DB."
             });
         }
-        req.profile = user;
-        next();
+        else{
+            req.profile = user;
+            next();
+        }
     })
 }
 
@@ -31,12 +33,14 @@ exports.updateUser = (req,res) => {
                 return res.status(400).json({
                     error: "You can't update user."
                 })
+            }   
+            else{    
+                user.salt = undefined;
+                user.encry_password = undefined;
+                user.createdAt = undefined;
+                user.updatedAt = undefined;
+                res.json(user);
             }
-            user.salt = undefined;
-            user.encry_password = undefined;
-            user.createdAt = undefined;
-            user.updatedAt = undefined;
-            res.json(user);
         }
     )
 }
@@ -49,8 +53,10 @@ exports.userPurchaseList = (req,res) =>{
             return res.status(400).json({
                 error: "No order Found."
             })
-        };
-        return res.json(order);
+        }
+        else{
+            return res.json(order);
+        }
     });
 }
 
@@ -79,7 +85,9 @@ exports.pushOrderInPurchaseList = (req,res,next) =>{
                     error: "failed to save purchases"
                 })
             }
-            next();
+            else{
+                next();
+            }
         }
     )
 }

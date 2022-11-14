@@ -14,20 +14,19 @@ const userSchema = new Schema(
         },
         lastname:{
             type: String,
+            required: true,
             maxlength: 32,
             trim: true
         },
         height:{
             type: Number,
             min: 0,
-            max: 210,
             trim: true,
             maxlength: 32
         },
         weight:{
             type: Number,
             min: 0,
-            max: 300,
             trim: true,
             maxlength: 32
         },
@@ -41,7 +40,6 @@ const userSchema = new Schema(
             type: String,
             trim: true
         },
-        //TODO: comeback here
         encry_password:{
             type: String,
             required: true

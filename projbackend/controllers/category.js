@@ -6,9 +6,11 @@ exports.getCategoryById = (req, res, next, id) =>{
             res.status(400).json({
                 error: "Category not Found."
             });
-        };
-        req.category = category;
+        }
+        else{
+            req.category = category;
         next();
+        }
     });
 };
 
@@ -19,8 +21,10 @@ exports.createCategory = (req,res) =>{
             res.status(400).json({
                 error: "Not able to create category."
             });
-        };
-        res.json({category});
+        }
+        else{
+            res.json({category});
+        }
     });
 };
 
@@ -33,8 +37,10 @@ exports.getAllCategory = (req,res) => {
             res.status(400).json({
                 error: "No categories found."
             });
-        };
-        res.json(categories);
+        }
+        else{
+            res.json(categories);
+        }
     });
 };
 
@@ -47,8 +53,10 @@ exports.updateCategory = (req,res) => {
             res.status(400).json({
                 error: "Not able to update category."
             });
-        };
-        res.json(updatedCategory);
+        }
+        else{
+            res.json(updatedCategory);
+        }
     });
 };
 
@@ -59,9 +67,10 @@ exports.removeCategory = (req,res) => {
             res.status(400).json({
                 error: "Failed to delete category."
             });
-        };
+        }
+        else{
         res.json({
             message: `Successfully Deleted ${category}.`
-        });
+        })}
     });
 };

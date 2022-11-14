@@ -1,3 +1,4 @@
+const e = require("express");
 const {Order,ProductCart} = require("../models/order");
 
 exports.getOrderById = (req,res,next,id) =>{
@@ -9,8 +10,10 @@ exports.getOrderById = (req,res,next,id) =>{
                 error: "No order Found."
             });
         }
-        req.order = order;
-        next();
+        else{
+            req.order = order;
+            next();
+        }
     });
 };
 
@@ -23,7 +26,9 @@ exports.createOrder = (req,res) =>{
                 error: "Failed to Save order in DB."
             });
         }
-        res.json(order);
+        else{
+            res.json(order);
+        }
     });
 };
 
@@ -35,8 +40,10 @@ exports.getAllOrders = (req,res) =>{
             return res.status(400).json({
                 error: "No order Found."
             });
-        };
-        res.json(order);
+        }
+        else{
+            res.json(order);
+        }
     });
 };
 
@@ -54,7 +61,9 @@ exports.updateStatus = (req,res) =>{
                     error: "Can't update order status."
                 });
             }
-            res.json(order);
+            else{
+                res.json(order);
+            }
         }
     );
 };

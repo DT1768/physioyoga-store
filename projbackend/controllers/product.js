@@ -10,9 +10,11 @@ exports.getProductById = (req,res,next,id) => {
             return res.status(400).json({
                 error: "Product Not Found."
             });
-        };
-        req.product = product;
-        next();
+        }
+        else{
+            req.product = product;
+            next();
+        }
     });
 };
 
@@ -33,6 +35,11 @@ exports.createProduct = (req,res) => {
         if(!name || !description || !price || !category || !stock){
             return res.status(400).json({
                 error: "Please include all fields"
+            });
+        }
+        else if(stock < 1) {
+            return res.status(400).json({
+                error: "Invalid Stock" 
             });
         }
 
@@ -83,11 +90,13 @@ exports.deleteProduct = (req,res) => {
             return res.status(400).json({
                 error: "Failed to delete product."
             });
-        };
-        res.json({
-            message: "Product Successfully Deleted.",
-            product
-        });
+        }
+        else{
+            res.json({
+                message: "Product Successfully Deleted.",
+                product
+            });
+        }
     });
 };
 
@@ -129,7 +138,9 @@ exports.updateProduct = (req,res) => {
                     error: "Product Updation Failed."
                 });
             }
-            res.json(product);
+            else{
+                res.json(product);
+            }
         })
     });
 };
@@ -148,7 +159,9 @@ exports.getAllProducts = (req,res) => {
                 error: "No product Found."
             });
         }
-        res.json(products)
+        else{
+            res.json(products);
+        }
     });
 };
 
@@ -158,8 +171,10 @@ exports.getAllUniqueCategories = (req,res) => {
             return res.stauts(400).json({
                 error: "No category Found."
             })
-        };
-        res.json(category);
+        }
+        else{
+            res.json(category);
+        }
     });
 };
 
@@ -178,7 +193,9 @@ exports.updateStock = (req,res,next) =>{
             return res.status(400).json({
                 error: "Inventory Update Failed."
             })
-        };
-        next();
+        }
+        else{
+            next();
+        }
     });
 };
